@@ -1,3 +1,6 @@
 {
-  "providers": ["node"]
+  "providers": ["node"],
+  "node": {
+    "version": "20"
+  }
 }
