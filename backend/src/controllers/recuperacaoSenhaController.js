@@ -1,28 +1,109 @@
 import pool from '../config/db.js';
 import bcrypt from 'bcrypt';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
-// =========================================
-// CONFIGURACAO DO EMAIL
-// =========================================
-const transporter = nodemailer.createTransport({
-  host: '74.125.133.108',
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Gera codigo de 6 digitos
 function gerarCodigo() {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
+// Template do email estilizado
+function gerarEmailHtml(nome, codigo) {
+  return `
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperacao de senha</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f5f0e8; font-family: Arial, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f0e8; padding: 40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 500px; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(27,76,90,0.10);">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background-color: #1B4C5A; padding: 36px 40px 28px 40px; text-align: center;">
+              <p style="margin: 0; font-size: 28px; font-weight: bold; color: #D7C8A9; letter-spacing: 2px;">PERTO DE MIM</p>
+              <p style="margin: 8px 0 0 0; font-size: 13px; color: #7AB8D3; letter-spacing: 1px;">Servicos proximos a voce</p>
+            </td>
+          </tr>
+
+          <!-- Divisor decorativo -->
+          <tr>
+            <td style="background: linear-gradient(to right, #C66F53, #7AB8D3); height: 4px;"></td>
+          </tr>
+
+          <!-- Corpo -->
+          <tr>
+            <td style="padding: 40px 40px 20px 40px;">
+              <p style="margin: 0 0 8px 0; font-size: 22px; font-weight: bold; color: #1B4C5A;">Recuperacao de senha</p>
+              <p style="margin: 0 0 24px 0; font-size: 15px; color: #555; line-height: 1.6;">
+                Ola, <strong style="color: #1B4C5A;">${nome}</strong>! Recebemos uma solicitacao para redefinir a senha da sua conta.
+              </p>
+              <p style="margin: 0 0 16px 0; font-size: 14px; color: #777;">Use o codigo abaixo para continuar:</p>
+            </td>
+          </tr>
+
+          <!-- Codigo -->
+          <tr>
+            <td style="padding: 0 40px 32px 40px;">
+              <div style="background-color: #f5f0e8; border: 2px solid #D7C8A9; border-radius: 12px; padding: 28px; text-align: center;">
+                <p style="margin: 0 0 8px 0; font-size: 12px; color: #A64B3B; letter-spacing: 2px; text-transform: uppercase; font-weight: bold;">Seu codigo</p>
+                <p style="margin: 0; font-size: 42px; font-weight: bold; letter-spacing: 12px; color: #1B4C5A;">${codigo}</p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Aviso de expiracao -->
+          <tr>
+            <td style="padding: 0 40px 32px 40px;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="background-color: #fff5f3; border-left: 4px solid #C66F53; border-radius: 4px; padding: 14px 16px;">
+                    <p style="margin: 0; font-size: 13px; color: #A64B3B;">
+                      ⏱ Este codigo expira em <strong>15 minutos</strong>.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Aviso de seguranca -->
+          <tr>
+            <td style="padding: 0 40px 36px 40px;">
+              <p style="margin: 0; font-size: 12px; color: #999; line-height: 1.6; text-align: center;">
+                Se voce nao solicitou a recuperacao de senha, ignore este e-mail.<br>
+                Sua senha permanecera a mesma.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #1B4C5A; padding: 20px 40px; text-align: center;">
+              <p style="margin: 0; font-size: 12px; color: #7AB8D3;">
+                © 2026 Perto de Mim — Todos os direitos reservados
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `;
+}
+
 // =========================================
 // PASSO 1 — SOLICITAR CODIGO
-// Usuario informa o email
 // =========================================
 export const solicitarCodigo = async (req, res) => {
   try {
@@ -32,13 +113,11 @@ export const solicitarCodigo = async (req, res) => {
       return res.status(400).json({ erro: 'E-mail e obrigatorio.' });
     }
 
-    // Verifica se o email existe
     const usuarioResult = await pool.query(
       'SELECT id, nome FROM usuarios WHERE email = $1',
       [email.toLowerCase().trim()]
     );
 
-    // Por seguranca, nao informamos se o email existe ou nao
     if (usuarioResult.rows.length === 0) {
       return res.json({
         mensagem: 'Se este e-mail estiver cadastrado, voce recebera um codigo em breve.'
@@ -63,23 +142,12 @@ export const solicitarCodigo = async (req, res) => {
       [usuario.id, codigo, expiraEm]
     );
 
-    // Envia o email
-    await transporter.sendMail({
-      from: `"Perto de Mim" <${process.env.EMAIL_USER}>`,
+    // Envia o email via Resend
+    await resend.emails.send({
+      from: 'Perto de Mim <onboarding@resend.dev>',
       to: email,
-      subject: 'Codigo de recuperacao de senha',
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto;">
-          <h2 style="color: #333;">Recuperacao de senha</h2>
-          <p>Ola, <strong>${usuario.nome}</strong>!</p>
-          <p>Seu codigo de recuperacao e:</p>
-          <div style="background: #f4f4f4; padding: 20px; text-align: center; border-radius: 8px; margin: 20px 0;">
-            <span style="font-size: 36px; font-weight: bold; letter-spacing: 8px; color: #333;">${codigo}</span>
-          </div>
-          <p>Este codigo expira em <strong>15 minutos</strong>.</p>
-          <p>Se voce nao solicitou a recuperacao de senha, ignore este email.</p>
-        </div>
-      `,
+      subject: 'Codigo de recuperacao de senha — Perto de Mim',
+      html: gerarEmailHtml(usuario.nome, codigo),
     });
 
     return res.json({
@@ -94,7 +162,6 @@ export const solicitarCodigo = async (req, res) => {
 
 // =========================================
 // PASSO 2 — VALIDAR CODIGO
-// Usuario informa o codigo recebido
 // =========================================
 export const validarCodigo = async (req, res) => {
   try {
@@ -104,7 +171,6 @@ export const validarCodigo = async (req, res) => {
       return res.status(400).json({ erro: 'E-mail e codigo sao obrigatorios.' });
     }
 
-    // Busca o usuario
     const usuarioResult = await pool.query(
       'SELECT id FROM usuarios WHERE email = $1',
       [email.toLowerCase().trim()]
@@ -116,7 +182,6 @@ export const validarCodigo = async (req, res) => {
 
     const usuario_id = usuarioResult.rows[0].id;
 
-    // Verifica o codigo
     const codigoResult = await pool.query(
       `SELECT id FROM codigos_recuperacao
        WHERE usuario_id = $1
@@ -140,7 +205,6 @@ export const validarCodigo = async (req, res) => {
 
 // =========================================
 // PASSO 3 — REDEFINIR SENHA
-// Usuario informa nova senha
 // =========================================
 export const redefinirSenha = async (req, res) => {
   try {
@@ -154,7 +218,6 @@ export const redefinirSenha = async (req, res) => {
       return res.status(400).json({ erro: 'A nova senha deve ter no minimo 6 caracteres.' });
     }
 
-    // Busca o usuario
     const usuarioResult = await pool.query(
       'SELECT id FROM usuarios WHERE email = $1',
       [email.toLowerCase().trim()]
@@ -166,7 +229,6 @@ export const redefinirSenha = async (req, res) => {
 
     const usuario_id = usuarioResult.rows[0].id;
 
-    // Verifica o codigo novamente
     const codigoResult = await pool.query(
       `SELECT id FROM codigos_recuperacao
        WHERE usuario_id = $1
@@ -180,14 +242,12 @@ export const redefinirSenha = async (req, res) => {
       return res.status(400).json({ erro: 'Codigo invalido ou expirado.' });
     }
 
-    // Atualiza a senha
     const senhaHash = await bcrypt.hash(nova_senha, 10);
     await pool.query(
       'UPDATE usuarios SET senha = $1 WHERE id = $2',
       [senhaHash, usuario_id]
     );
 
-    // Marca o codigo como usado
     await pool.query(
       'UPDATE codigos_recuperacao SET usado = TRUE WHERE id = $1',
       [codigoResult.rows[0].id]
