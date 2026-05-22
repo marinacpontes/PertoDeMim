@@ -1,4 +1,5 @@
 {
+  "name": "PertoDeMim",
   "dependencies": {
     "resend": "^6.12.3"
   }
