@@ -1,3 +1,4 @@
+// Configuração do projeto Perto de Mim
 pluginManagement {
     repositories {
         google {
@@ -22,5 +23,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Perto de Mim"
+rootProject.name = "frontend"
 include(":app")

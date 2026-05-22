@@ -7,8 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 // Singleton para o cliente Retrofit
 public class RetrofitClient {
-    // 10.0.2.2 é o IP padrão para o emulador acessar o localhost do seu computador
-    private static final String BASE_URL = "http://10.0.2.2:3000/";
+    // URL de produção do backend hospedado no Railway
+    private static final String BASE_URL = "https://backend-production-b962.up.railway.app/";
     private static Retrofit retrofit = null;
 
     public static ApiService getApiService() {
