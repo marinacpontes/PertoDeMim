@@ -4,6 +4,15 @@ API REST do aplicativo Perto de Mim, desenvolvida em Node.js com Express e Postg
 
 ---
 
+## Ambientes
+
+| Ambiente | URL |
+|---|---|
+| Local | `http://localhost:3000` |
+| Producao | `https://backend-production-b962.up.railway.app` |
+
+---
+
 ## Tecnologias
 
 - Node.js com ES Modules
@@ -14,10 +23,11 @@ API REST do aplicativo Perto de Mim, desenvolvida em Node.js com Express e Postg
 - dotenv (variaveis de ambiente)
 - multer (upload de imagens)
 - nodemailer (envio de email)
+- Railway (deploy e hospedagem)
 
 ---
 
-## Como rodar o projeto
+## Como rodar o projeto localmente
 
 ### Pre-requisitos
 - Node.js instalado
@@ -28,6 +38,7 @@ API REST do aplicativo Perto de Mim, desenvolvida em Node.js com Express e Postg
 1. Clone o repositorio:
 ```bash
 git clone https://github.com/marinacpontes/pertodemim.git
+cd pertodemim/backend
 ```
 
 2. Instale as dependencias:
@@ -35,7 +46,7 @@ git clone https://github.com/marinacpontes/pertodemim.git
 npm install
 ```
 
-3. Crie o arquivo `.env` na raiz do projeto:
+3. Crie o arquivo `.env` na pasta `backend/`:
 ```
 DB_USER=seu_usuario_postgres
 DB_HOST=localhost
@@ -48,9 +59,14 @@ EMAIL_PASS=sua_app_password_gmail
 ```
 
 > **Mac:** o usuario geralmente e o nome do sistema (ex: `juliaduran`). **Windows:** geralmente e `postgres`.
-> **EMAIL_PASS:** usar App Password do Gmail (nao a senha normal). Gerar em: Minha Conta Google → Segurança → Senhas de app.
+> **EMAIL_PASS:** usar App Password do Gmail (nao a senha normal). Gerar em: Minha Conta Google → Seguranca → Senhas de app.
 
-4. Rode o servidor:
+4. Crie o banco de dados e as tabelas:
+```bash
+node init_db.js
+```
+
+5. Rode o servidor:
 ```bash
 node src/app.js
 ```
@@ -62,61 +78,45 @@ Servidor em `http://localhost:3000`
 ## Estrutura do projeto
 
 ```
-backend-app/
-├── src/
-│   ├── config/
-│   │   └── db.js
-│   ├── controllers/
-│   │   ├── usuariosController.js
-│   │   ├── fornecedoresController.js
-│   │   ├── servicosController.js
-│   │   ├── pedidosController.js
-│   │   ├── avaliacoesController.js
-│   │   ├── favoritosController.js
-│   │   ├── portfolioController.js
-│   │   ├── pagamentosController.js
-│   │   ├── mensagensController.js
-│   │   ├── recuperacaoSenhaController.js
-│   │   └── authController.js
-│   ├── middlewares/
-│   │   └── authMiddleware.js
-│   ├── routes/
-│   │   ├── usuarios.js
-│   │   ├── fornecedores.js
-│   │   ├── servicos.js
-│   │   ├── pedidos.js
-│   │   ├── avaliacoes.js
-│   │   ├── favoritos.js
-│   │   ├── portfolio.js
-│   │   ├── pagamentos.js
-│   │   ├── mensagens.js
-│   │   ├── recuperacao.js
-│   │   └── auth.js
-│   └── app.js
-├── uploads/              # Imagens de portfolio e chat
-├── .env                  # NAO sobe no Git
-├── .env.example
-├── .gitignore
-└── package.json
-```
-
----
-
-## app.js — rotas registradas
-
-```js
-app.use('/usuarios', usuariosRoutes);
-app.use('/auth', authRoutes);
-app.use('/recuperacao', recuperacaoRoutes);
-app.use('/fornecedores', fornecedoresRoutes);
-app.use('/servicos', servicosRoutes);
-app.use('/pedidos', pedidosRoutes);
-app.use('/avaliacoes', avaliacoesRoutes);
-app.use('/favoritos', favoritosRoutes);
-app.use('/uploads', express.static('uploads'));
-app.use('/portfolio', portfolioRoutes);
-app.use('/pagamentos', pagamentosRoutes);
-app.use('/mensagens', mensagensRoutes);
+pertodemim/
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   │   └── db.js
+│   │   ├── controllers/
+│   │   │   ├── usuariosController.js
+│   │   │   ├── fornecedoresController.js
+│   │   │   ├── servicosController.js
+│   │   │   ├── pedidosController.js
+│   │   │   ├── avaliacoesController.js
+│   │   │   ├── favoritosController.js
+│   │   │   ├── portfolioController.js
+│   │   │   ├── pagamentosController.js
+│   │   │   ├── mensagensController.js
+│   │   │   ├── recuperacaoSenhaController.js
+│   │   │   └── authController.js
+│   │   ├── middlewares/
+│   │   │   └── authMiddleware.js
+│   │   ├── routes/
+│   │   │   ├── usuarios.js
+│   │   │   ├── fornecedores.js
+│   │   │   ├── servicos.js
+│   │   │   ├── pedidos.js
+│   │   │   ├── avaliacoes.js
+│   │   │   ├── favoritos.js
+│   │   │   ├── portfolio.js
+│   │   │   ├── pagamentos.js
+│   │   │   ├── mensagens.js
+│   │   │   ├── recuperacao.js
+│   │   │   └── auth.js
+│   │   └── app.js
+│   ├── uploads/              # Imagens de portfolio e chat
+│   ├── .env                  # NAO sobe no Git
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── init_db.js
+│   └── package.json
+└── frontend/                 # App Android (Marina)
 ```
 
 ---
@@ -137,7 +137,9 @@ Token obtido no login, expira em 7 dias.
 
 ### 1. Usuarios
 
-#### POST `/usuarios` — Criar cliente
+#### POST `/usuarios` — Criar usuario (cliente ou fornecedor basico)
+
+> Para cadastrar fornecedor completo (com dados da loja), usar `POST /fornecedores`.
 
 **Body:**
 ```json
@@ -181,7 +183,9 @@ Token obtido no login, expira em 7 dias.
 
 ### 2. Fornecedores
 
-#### POST `/fornecedores` — Cadastrar fornecedor
+#### POST `/fornecedores` — Cadastrar fornecedor completo
+
+Cria registro nas tabelas `usuarios` e `fornecedores` em transacao atomica.
 
 **Body:**
 ```json
@@ -231,7 +235,7 @@ Token obtido no login, expira em 7 dias.
 }
 ```
 
-**Categorias:** 1-Beleza | 2-Saude | 3-Alimentacao | 4-Manutencao | 5-Tecnologia | 6-Outros
+**Categorias:** 1-Beleza e Estetica | 2-Saude | 3-Alimentacao | 4-Manutencao | 5-Tecnologia | 6-Outros
 
 ---
 
@@ -337,7 +341,7 @@ So apos pedido `concluido`. 1 avaliacao por pedido. Nota 1-5.
 | imagem | File | JPG, PNG ou WEBP, max 5MB |
 | servico_id | Text | ID do servico |
 
-> Imagem acessivel em `http://localhost:3000/uploads/nome-arquivo.jpeg`
+> Imagem acessivel em `https://backend-production-b962.up.railway.app/uploads/nome-arquivo.jpeg`
 
 ---
 
@@ -374,6 +378,8 @@ So apos pedido `concluido`. 1 avaliacao por pedido. Nota 1-5.
 ### 10. Recuperacao de senha
 
 Fluxo em 3 passos: solicitar codigo → validar codigo → redefinir senha.
+
+> **Observacao:** em ambiente de producao (Railway), o envio de email pode estar bloqueado por restricoes de SMTP. Funciona normalmente em ambiente local.
 
 #### POST `/recuperacao/solicitar` — Solicitar codigo por email
 
@@ -461,4 +467,5 @@ Fluxo em 3 passos: solicitar codigo → validar codigo → redefinir senha.
 13. **Mensagens texto:** enviar como `raw JSON`. Mensagens imagem: `form-data`. Max 200MB.
 14. **Recuperacao de senha:** fluxo em 3 etapas. Codigo expira em 15 minutos.
 15. **Datas:** retornadas em UTC. Converter para `America/Sao_Paulo` ao exibir.
-16. **Emulador Android:** usar `http://10.0.2.2:3000` em vez de `http://localhost:3000`.
+16. **URL da API:** usar `https://backend-production-b962.up.railway.app` no app Android. Para testes locais, usar `http://10.0.2.2:3000` no emulador.
+17. **Cadastro de fornecedor:** usar `POST /fornecedores` (nao `/usuarios`) para criar perfil completo com dados da loja.
