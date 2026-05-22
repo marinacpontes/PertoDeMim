@@ -22,7 +22,7 @@ API REST do aplicativo Perto de Mim, desenvolvida em Node.js com Express e Postg
 - JWT (autenticacao)
 - dotenv (variaveis de ambiente)
 - multer (upload de imagens)
-- nodemailer (envio de email)
+- resend (envio de email)
 - Railway (deploy e hospedagem)
 
 ---
@@ -54,19 +54,13 @@ DB_NAME=perto_de_mim
 DB_PASSWORD=sua_senha
 DB_PORT=5432
 JWT_SECRET=uma_chave_secreta_longa
-EMAIL_USER=seu_email@gmail.com
-EMAIL_PASS=sua_app_password_gmail
+RESEND_API_KEY=sua_chave_do_resend
 ```
 
 > **Mac:** o usuario geralmente e o nome do sistema (ex: `juliaduran`). **Windows:** geralmente e `postgres`.
-> **EMAIL_PASS:** usar App Password do Gmail (nao a senha normal). Gerar em: Minha Conta Google → Seguranca → Senhas de app.
+> **RESEND_API_KEY:** criar conta gratuita em https://resend.com e gerar uma chave de API. Plano gratuito inclui 3.000 emails/mes.
 
-4. Crie o banco de dados e as tabelas:
-```bash
-node init_db.js
-```
-
-5. Rode o servidor:
+4. Rode o servidor:
 ```bash
 node src/app.js
 ```
@@ -114,7 +108,6 @@ pertodemim/
 │   ├── .env                  # NAO sobe no Git
 │   ├── .env.example
 │   ├── .gitignore
-│   ├── init_db.js
 │   └── package.json
 └── frontend/                 # App Android (Marina)
 ```
@@ -137,7 +130,7 @@ Token obtido no login, expira em 7 dias.
 
 ### 1. Usuarios
 
-#### POST `/usuarios` — Criar usuario (cliente ou fornecedor basico)
+#### POST `/usuarios` — Criar cliente
 
 > Para cadastrar fornecedor completo (com dados da loja), usar `POST /fornecedores`.
 
@@ -184,8 +177,6 @@ Token obtido no login, expira em 7 dias.
 ### 2. Fornecedores
 
 #### POST `/fornecedores` — Cadastrar fornecedor completo
-
-Cria registro nas tabelas `usuarios` e `fornecedores` em transacao atomica.
 
 **Body:**
 ```json
@@ -379,7 +370,7 @@ So apos pedido `concluido`. 1 avaliacao por pedido. Nota 1-5.
 
 Fluxo em 3 passos: solicitar codigo → validar codigo → redefinir senha.
 
-> **Observacao:** em ambiente de producao (Railway), o envio de email pode estar bloqueado por restricoes de SMTP. Funciona normalmente em ambiente local.
+O email e enviado via **Resend** com layout estilizado nas cores do app. O codigo expira em 15 minutos e so pode ser usado uma vez.
 
 #### POST `/recuperacao/solicitar` — Solicitar codigo por email
 
@@ -391,8 +382,6 @@ Fluxo em 3 passos: solicitar codigo → validar codigo → redefinir senha.
   "mensagem": "Se este e-mail estiver cadastrado, voce recebera um codigo em breve."
 }
 ```
-
-> O codigo de 6 digitos e enviado por email e expira em **15 minutos**.
 
 ---
 
@@ -419,12 +408,7 @@ Fluxo em 3 passos: solicitar codigo → validar codigo → redefinir senha.
 }
 ```
 
-**Resposta:**
-```json
-{
-  "mensagem": "Senha redefinida com sucesso!"
-}
-```
+**Resposta:** `{ "mensagem": "Senha redefinida com sucesso!" }`
 
 ---
 
@@ -465,7 +449,8 @@ Fluxo em 3 passos: solicitar codigo → validar codigo → redefinir senha.
 11. **Avaliacoes:** so apos `concluido`. Mapear estrelas (1-5) para numeros.
 12. **Portfolio:** enviar como `multipart/form-data`. Max 5MB.
 13. **Mensagens texto:** enviar como `raw JSON`. Mensagens imagem: `form-data`. Max 200MB.
-14. **Recuperacao de senha:** fluxo em 3 etapas. Codigo expira em 15 minutos.
+14. **Recuperacao de senha:** fluxo em 3 etapas. Codigo expira em 15 minutos e so pode ser usado uma vez.
 15. **Datas:** retornadas em UTC. Converter para `America/Sao_Paulo` ao exibir.
-16. **URL da API:** usar `https://backend-production-b962.up.railway.app` no app Android. Para testes locais, usar `http://10.0.2.2:3000` no emulador.
-17. **Cadastro de fornecedor:** usar `POST /fornecedores` (nao `/usuarios`) para criar perfil completo com dados da loja.
+16. **URL da API em producao:** `https://backend-production-b962.up.railway.app`
+17. **Emulador Android:** usar `http://10.0.2.2:3000` para testes locais.
+18. **Cadastro de fornecedor:** usar `POST /fornecedores` para criar perfil completo com dados da loja.
