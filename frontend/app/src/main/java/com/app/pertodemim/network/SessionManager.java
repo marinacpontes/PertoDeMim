@@ -24,6 +24,15 @@ public class SessionManager {
         editor.apply();
     }
 
+    public void saveUserId(int id) {
+        editor.putInt(KEY_USER_ID, id);
+        editor.apply();
+    }
+
+    public int fetchUserId() {
+        return pref.getInt(KEY_USER_ID, -1);
+    }
+
     public String fetchAuthToken() {
         return pref.getString(KEY_TOKEN, null);
     }

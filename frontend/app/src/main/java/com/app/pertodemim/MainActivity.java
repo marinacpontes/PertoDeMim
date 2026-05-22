@@ -83,9 +83,10 @@ public class MainActivity extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null) {
                             UserResponse userResponse = response.body();
                             
-                            // Salva o token e o tipo de usuário
+                            // Salva o token, ID e o tipo de usuário
                             sessionManager.saveAuthToken(userResponse.getToken());
                             if (userResponse.getUsuario() != null) {
+                                sessionManager.saveUserId(userResponse.getUsuario().getId());
                                 sessionManager.saveUserType(userResponse.getUsuario().getTipo());
                             }
 
