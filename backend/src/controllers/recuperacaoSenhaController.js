@@ -2,7 +2,7 @@ import pool from '../config/db.js';
 import bcrypt from 'bcrypt';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 // Gera codigo de 6 digitos
 function gerarCodigo() {
@@ -143,6 +143,15 @@ export const solicitarCodigo = async (req, res) => {
     );
 
     // Envia o email via Resend
+    if (!resend) {
+      console.error('RESEND_API_KEY não configurada no arquivo .env');
+      // Ainda retornamos sucesso para o usuário por segurança (não revelar se o email existe)
+      // mas o código não será enviado. Em desenvolvimento, isso avisa o erro no console.
+      return res.json({
+        mensagem: 'Se este e-mail estiver cadastrado, voce recebera um codigo em breve.'
+      });
+    }
+
     await resend.emails.send({
       from: 'Perto de Mim <onboarding@resend.dev>',
       to: email,
