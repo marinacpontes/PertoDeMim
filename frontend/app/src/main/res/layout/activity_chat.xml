@@ -87,16 +87,15 @@
                     android:id="@+id/avatar1"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:background="@drawable/circle_orange"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="SB"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivAvatar1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/logobelaforma"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/CircleImage" />
 
                     <View
                         android:layout_width="14dp"
@@ -162,16 +161,15 @@
                     android:id="@+id/avatar2"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:background="@drawable/circle_orange"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="TC"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivAvatar2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/logotechfix"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/CircleImage" />
                 </FrameLayout>
 
                 <TextView
@@ -244,16 +242,15 @@
                     android:id="@+id/avatar3"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:background="@drawable/circle_orange"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="PN"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivAvatar3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/logopizzarianapolitana"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/CircleImage" />
 
                     <View
                         android:layout_width="14dp"
@@ -319,16 +316,15 @@
                     android:id="@+id/avatar4"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:background="@drawable/circle_orange"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="AF"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivAvatar4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/logofitlife"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/CircleImage" />
                 </FrameLayout>
 
                 <TextView

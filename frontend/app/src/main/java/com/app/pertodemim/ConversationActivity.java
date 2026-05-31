@@ -13,10 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-// Tela de detalhes da conversa (Chat individual)
 public class ConversationActivity extends AppCompatActivity {
 
-    // Componentes de interface (lista de mensagens, campo de texto e rolagem)
     private LinearLayout llMessagesContainer;
     private EditText editMessage;
     private NestedScrollView scrollView;
@@ -24,50 +22,45 @@ public class ConversationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Define o layout da tela de detalhe da conversa
         setContentView(R.layout.activity_chat_detail);
 
-        // Inicializa os componentes
         llMessagesContainer = findViewById(R.id.llMessagesContainer);
         editMessage = findViewById(R.id.editMessage);
         scrollView = findViewById(R.id.scrollView);
         TextView tvChatTitle = findViewById(R.id.tvChatTitle);
+        ImageView ivChatAvatar = findViewById(R.id.ivChatAvatar);
 
-        // Recupera o nome do contato enviado pela tela anterior
         String contactName = getIntent().getStringExtra("contactName");
         if (contactName != null && !contactName.isEmpty()) {
             tvChatTitle.setText(contactName);
+            setAvatar(contactName, ivChatAvatar);
             loadInitialMessages(contactName);
         }
 
-        // Configura o botão de voltar: fecha a tela atual e retorna à lista de chats
         ImageView btnBack = findViewById(R.id.btnBack);
-        if (btnBack != null) {
-            btnBack.setOnClickListener(v -> finish());
-        }
+        if (btnBack != null) btnBack.setOnClickListener(v -> finish());
+        findViewById(R.id.btnSend).setOnClickListener(v -> sendMessage());
+        editMessage.setOnEditorActionListener((v, actionId, event) -> { sendMessage(); return true; });
 
-        // Configura o botão de enviar mensagem
-        View btnSend = findViewById(R.id.btnSend);
-        btnSend.setOnClickListener(v -> sendMessage());
-
-        // Permite enviar a mensagem ao apertar o botão "Enter" do teclado virtual
-        editMessage.setOnEditorActionListener((v, actionId, event) -> {
-            sendMessage();
-            return true;
-        });
-
-        // Garante que a conversa role para a última mensagem quando o teclado abrir (layout mudar)
         llMessagesContainer.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
-            if (bottom < oldBottom) {
-                scrollView.postDelayed(() -> scrollView.fullScroll(View.FOCUS_DOWN), 100);
-            }
+            if (bottom < oldBottom) scrollView.postDelayed(() -> scrollView.fullScroll(View.FOCUS_DOWN), 100);
         });
     }
 
-    // Simula o carregamento de mensagens iniciais dependendo do contato
+    private void setAvatar(String name, ImageView ivAvatar) {
+        if (ivAvatar == null) return;
+        switch (name) {
+            case "Salão Bela Forma": ivAvatar.setImageResource(R.drawable.logobelaforma); break;
+            case "TechFix Consertos": ivAvatar.setImageResource(R.drawable.logotechfix); break;
+            case "Pizzaria Napolitana": ivAvatar.setImageResource(R.drawable.logopizzarianapolitana); break;
+            case "Academia FitLife": ivAvatar.setImageResource(R.drawable.logofitlife); break;
+            case "Auto Mecânica Silva": ivAvatar.setImageResource(R.drawable.logoautomecanicasilva); break;
+            case "Escola de Idiomas Global": ivAvatar.setImageResource(R.drawable.logoescoladeidiomasglobal); break;
+        }
+    }
+
     private void loadInitialMessages(String name) {
-        llMessagesContainer.removeAllViews(); // Limpa as mensagens estáticas do XML
-        
+        llMessagesContainer.removeAllViews();
         switch (name) {
             case "Salão Bela Forma":
                 addMessageToUI("Olá! Gostaria de agendar um horário", "15:25", true);
@@ -93,36 +86,19 @@ public class ConversationActivity extends AppCompatActivity {
         }
     }
 
-    // Função que processa e exibe a mensagem enviada pelo usuário
     private void sendMessage() {
         String text = editMessage.getText().toString().trim();
-        if (text.isEmpty()) return; // Não envia se estiver vazio
-
-        // Obtém o horário atual no formato HH:mm
+        if (text.isEmpty()) return;
         String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
-        
-        // Adiciona a mensagem visualmente na tela (simulação de front-end)
         addMessageToUI(text, currentTime, true);
-
-        // Limpa o campo de entrada e rola para o fim da lista
         editMessage.setText("");
         scrollView.post(() -> scrollView.fullScroll(View.FOCUS_DOWN));
     }
 
-    // Cria e adiciona um "balão" de mensagem no container da tela
     private void addMessageToUI(String text, String time, boolean isMe) {
-        // Escolhe o layout do balão (Direita se for "Eu", Esquerda se for "Outro")
-        int layoutId = isMe ? R.layout.item_message_me : R.layout.item_message_other;
-        View bubble = LayoutInflater.from(this).inflate(layoutId, llMessagesContainer, false);
-        
-        // Preenche o texto da mensagem e a hora
-        TextView tvText = bubble.findViewById(R.id.tvMessageText);
-        TextView tvTime = bubble.findViewById(R.id.tvMessageTime);
-        
-        tvText.setText(text);
-        tvTime.setText(time);
-
-        // Adiciona o novo balão na lista de mensagens da tela
+        View bubble = LayoutInflater.from(this).inflate(isMe ? R.layout.item_message_me : R.layout.item_message_other, llMessagesContainer, false);
+        ((TextView) bubble.findViewById(R.id.tvMessageText)).setText(text);
+        ((TextView) bubble.findViewById(R.id.tvMessageTime)).setText(time);
         llMessagesContainer.addView(bubble);
     }
 }

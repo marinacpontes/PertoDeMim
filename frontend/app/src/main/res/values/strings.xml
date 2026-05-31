@@ -142,11 +142,11 @@
     <string name="avaliacoes">Avaliações</string>
     <string name="enviar_mensagem">Enviar mensagem</string>
     <string name="contratar_servico">Contratar serviço</string>
-    <string name="finalizar_agendamento">Finalizar Agendamento</string>
+    <string name="finalizar_agendamento">Agendar serviço</string>
     <string name="detalhes_do_servico">Detalhes do Serviço</string>
     <string name="agendamento">Agendamento</string>
     <string name="forma_de_pagamento">Forma de Pagamento</string>
-    <string name="confirmar_agendamento">Confirmar Agendamento</string>
+    <string name="confirmar_agendamento">Finalizar agendamento</string>
     <string name="pedido_confirmado">Pedido Confirmado!</string>
     <string name="sucesso_agendamento">Seu agendamento foi realizado com sucesso</string>
     <string name="redirecionando">Redirecionando...</string>
@@ -185,6 +185,8 @@
     <string name="hint_logradouro">Rua, Avenida, etc.</string>
     <string name="bairro_label">Bairro</string>
     <string name="hint_bairro">Centro</string>
+    <string name="hint_cidade">Ex: São Paulo</string>
+    <string name="hint_estado">SP</string>
     <string name="salvar_endereco">Salvar Endereço</string>
     <string name="editar_endereco_title">Editar Endereço</string>
     <string name="novo_endereco_title">Novo Endereço</string>

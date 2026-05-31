@@ -32,17 +32,16 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="12dp"
-            android:background="@drawable/circle_avatar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/btnBack"
             app:layout_constraintTop_toTopOf="parent">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="SB"
-                android:textColor="@color/verde_petroleo_profundo"
-                android:textStyle="bold" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivChatAvatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/logobelaforma"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/CircleImage" />
         </FrameLayout>
 
         <LinearLayout

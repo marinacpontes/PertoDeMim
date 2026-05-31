@@ -1,45 +1,15 @@
 package com.app.pertodemim.model;
 
 public class CadastroFornecedorRequest {
-    private String nome;
-    private String email;
-    private String senha;
-    private String telefone;
-    private String cpf_cnpj;
-    private String data_nascimento;
-    private String logradouro;
-    private String cep;
-    private String numero;
-    private String bairro;
-    private String cidade;
-    private String estado;
-    private String nome_loja;
-    private String nome_responsavel;
-    private String categoria;
-    private String descricao;
+    private String nome, email, senha, telefone, cpf_cnpj, data_nascimento, logradouro, cep, numero, bairro, cidade, estado, nome_loja, nome_responsavel, categoria, descricao;
     private double preco_medio;
 
     public CadastroFornecedorRequest(String nome, String email, String senha, String telefone, String cpf_cnpj, String data_nascimento, String logradouro, String cep, String numero, String bairro, String cidade, String estado, String nome_loja, String nome_responsavel, String categoria, String descricao, double preco_medio) {
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.telefone = telefone;
-        this.cpf_cnpj = cpf_cnpj;
-        this.data_nascimento = data_nascimento;
-        this.logradouro = logradouro;
-        this.cep = cep;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.nome_loja = nome_loja;
-        this.nome_responsavel = nome_responsavel;
-        this.categoria = categoria;
-        this.descricao = descricao;
-        this.preco_medio = preco_medio;
+        this.nome = nome; this.email = email; this.senha = senha; this.telefone = telefone; this.cpf_cnpj = cpf_cnpj; this.data_nascimento = data_nascimento;
+        this.logradouro = logradouro; this.cep = cep; this.numero = numero; this.bairro = bairro; this.cidade = cidade; this.estado = estado;
+        this.nome_loja = nome_loja; this.nome_responsavel = nome_responsavel; this.categoria = categoria; this.descricao = descricao; this.preco_medio = preco_medio;
     }
 
-    // Getters e Setters
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
     public String getEmail() { return email; }

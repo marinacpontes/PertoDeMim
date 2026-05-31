@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/off_white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/verde_petroleo_profundo"
+        android:padding="20dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back_arrow_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/voltar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Política de Privacidade"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnBack"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/verde_petroleo_profundo"
+            android:textSize="14sp"
+            android:lineSpacingExtra="4dp"
+            android:text="POLÍTICA DE PRIVACIDADE DO PERTO DE MIM\n\n1. Coleta de Informações\nColetamos informações que você nos fornece diretamente ao criar uma conta, como nome, e-mail e localização. Também coletamos dados sobre o uso do aplicativo para melhorar sua experiência.\n\n2. Uso dos Dados\nSeus dados são utilizados para conectar você a fornecedores de serviços próximos, processar agendamentos e garantir a segurança da plataforma.\n\n3. Compartilhamento\nNão vendemos seus dados para terceiros. Compartilhamos apenas as informações necessárias com os fornecedores que você decide contratar.\n\n4. Seus Direitos\nVocê pode acessar, corrigir ou excluir seus dados a qualquer momento através das configurações do seu perfil.\n\n5. Contato\nPara dúvidas sobre sua privacidade, entre em contato conosco através do suporte." />
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

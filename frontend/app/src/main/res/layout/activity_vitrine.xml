@@ -7,7 +7,6 @@
     android:background="@color/off_white"
     tools:context=".VitrineActivity">
 
-    <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/vitrineHeader"
         android:layout_width="match_parent"
@@ -30,12 +29,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/searchCardVitrine"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
             android:layout_marginTop="16dp"
-            app:cardCornerRadius="24dp"
+            android:layout_marginEnd="12dp"
+            app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
             app:cardBackgroundColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/btnMenuVitrine"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvVitrineTitle">
 
             <LinearLayout
@@ -43,7 +45,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="16dp">
+                android:paddingHorizontal="12dp">
 
                 <ImageView
                     android:layout_width="20dp"
@@ -63,9 +65,292 @@
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnMenuVitrine"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/searchCardVitrine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/searchCardVitrine">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_menu"
+                app:tint="@color/verde_petroleo_profundo"
+                android:contentDescription="@null" />
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Categories -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/filtersContainerVitrine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/white"
+        android:layout_marginTop="0dp"
+        android:translationZ="10dp"
+        app:layout_constraintTop_toBottomOf="@id/vitrineHeader">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tvFiltros"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filtros"
+                android:textColor="@color/verde_petroleo_profundo"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btnCloseFiltersVitrine"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_close"
+                app:tint="@color/text_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@null" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rowFilters1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/tvFiltros">
+
+                <TextView
+                    android:id="@+id/labelPrecoHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preco"
+                    android:textColor="@color/verde_petroleo_profundo"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/labelDistanciaHeader"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btnFiltroPreco"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/off_white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btnFiltroDistancia"
+                    app:layout_constraintTop_toBottomOf="@id/labelPrecoHeader">
+                    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent" android:paddingHorizontal="12dp">
+                        <TextView android:id="@+id/tvSelectedPreco" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerVertical="true" android:text="@string/todos" />
+                        <ImageView android:layout_width="20dp" android:layout_height="20dp" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:src="@drawable/ic_arrow_drop_down" android:contentDescription="@null" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/labelDistanciaHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/distancia"
+                    android:textColor="@color/verde_petroleo_profundo"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/labelPrecoHeader"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btnFiltroDistancia"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/off_white"
+                    app:layout_constraintStart_toEndOf="@id/btnFiltroPreco"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/labelDistanciaHeader">
+                    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent" android:paddingHorizontal="12dp">
+                        <TextView android:id="@+id/tvSelectedDistancia" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerVertical="true" android:text="@string/qualquer" />
+                        <ImageView android:layout_width="20dp" android:layout_height="20dp" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:src="@drawable/ic_arrow_drop_down" android:contentDescription="@null" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/panelsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/rowFilters1">
+
+                <LinearLayout
+                    android:id="@+id/panelPreco"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_marginTop="16dp">
+                    <com.google.android.material.slider.RangeSlider
+                        android:id="@+id/sliderPreco"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:valueFrom="0.0"
+                        android:valueTo="10000.0"
+                        app:values="@array/initial_price_values"
+                        app:trackColorInactive="@color/off_white"
+                        app:trackColorActive="@color/verde_petroleo_profundo"
+                        app:thumbColor="@color/white"
+                        app:thumbStrokeColor="@color/text_gray"
+                        app:thumbStrokeWidth="1dp"
+                        app:thumbElevation="4dp" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginEnd="8dp" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/minimo" android:textSize="12sp" />
+                            <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="45dp" android:layout_marginTop="4dp" app:cardCornerRadius="22dp" app:cardElevation="0dp" app:strokeColor="@color/text_gray" app:strokeWidth="1dp">
+                                <EditText android:id="@+id/editMinPreco" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@android:color/transparent" android:gravity="center_vertical" android:inputType="numberDecimal" android:paddingHorizontal="16dp" android:textSize="14sp" android:hint="@string/hint_min_preco" android:autofillHints="none" />
+                            </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="8dp" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/maximo" android:textSize="12sp" />
+                            <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="45dp" android:layout_marginTop="4dp" app:cardCornerRadius="22dp" app:cardElevation="0dp" app:strokeColor="@color/text_gray" app:strokeWidth="1dp">
+                                <EditText android:id="@+id/editMaxPreco" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@android:color/transparent" android:gravity="center_vertical" android:inputType="numberDecimal" android:paddingHorizontal="16dp" android:textSize="14sp" android:hint="@string/hint_max_preco" android:autofillHints="none" />
+                            </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/panelDistancia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_marginTop="16dp">
+                    <com.google.android.material.slider.RangeSlider
+                        android:id="@+id/sliderDistancia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:valueFrom="0.0"
+                        android:valueTo="5.0"
+                        app:values="@array/initial_distance_values"
+                        app:trackColorInactive="@color/off_white"
+                        app:trackColorActive="@color/verde_petroleo_profundo"
+                        app:thumbColor="@color/white"
+                        app:thumbStrokeColor="@color/text_gray"
+                        app:thumbStrokeWidth="1dp"
+                        app:thumbElevation="4dp" />
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginEnd="8dp" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/minimo" android:textSize="12sp" />
+                            <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="45dp" android:layout_marginTop="4dp" app:cardCornerRadius="22dp" app:cardElevation="0dp" app:strokeColor="@color/text_gray" app:strokeWidth="1dp">
+                                <EditText android:id="@+id/editMinDistancia" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@android:color/transparent" android:gravity="center_vertical" android:inputType="numberDecimal" android:paddingHorizontal="16dp" android:textSize="14sp" android:hint="@string/hint_min_dist" android:autofillHints="none" />
+                            </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="8dp" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/maximo" android:textSize="12sp" />
+                            <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="45dp" android:layout_marginTop="4dp" app:cardCornerRadius="22dp" app:cardElevation="0dp" app:strokeColor="@color/text_gray" app:strokeWidth="1dp">
+                                <EditText android:id="@+id/editMaxDistancia" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@android:color/transparent" android:gravity="center_vertical" android:inputType="numberDecimal" android:paddingHorizontal="16dp" android:textSize="14sp" android:hint="@string/hint_max_dist" android:autofillHints="none" />
+                            </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rowFilters2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/panelsContainer">
+
+                <TextView
+                    android:id="@+id/labelAvaliacaoHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/avaliacao"
+                    android:textColor="@color/verde_petroleo_profundo"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/labelCategoriaHeader"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btnFiltroAvaliacao"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/off_white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btnFiltroCategoria"
+                    app:layout_constraintTop_toBottomOf="@id/labelAvaliacaoHeader">
+                    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent" android:paddingHorizontal="12dp">
+                        <TextView android:id="@+id/tvSelectedAvaliacao" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerVertical="true" android:text="@string/todas" />
+                        <ImageView android:layout_width="20dp" android:layout_height="20dp" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:src="@drawable/ic_arrow_drop_down" android:contentDescription="@null" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/labelCategoriaHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/categoria"
+                    android:textColor="@color/verde_petroleo_profundo"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/labelAvaliacaoHeader"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btnFiltroCategoria"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/off_white"
+                    app:layout_constraintStart_toEndOf="@id/btnFiltroAvaliacao"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/labelCategoriaHeader">
+                    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent" android:paddingHorizontal="12dp">
+                        <TextView android:id="@+id/tvSelectedCategoria" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerVertical="true" android:text="@string/todas" />
+                        <ImageView android:layout_width="20dp" android:layout_height="20dp" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:src="@drawable/ic_arrow_drop_down" android:contentDescription="@null" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnApplyFilters"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                android:text="Aplicar Filtros"
+                android:backgroundTint="@color/terracota"
+                app:cornerRadius="12dp"
+                app:layout_constraintTop_toBottomOf="@id/rowFilters2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
     <HorizontalScrollView
         android:id="@+id/svCategories"
         android:layout_width="match_parent"
@@ -160,7 +445,6 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <!-- Services List -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -173,7 +457,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Service 1: Corte + Escova -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardService1"
                 android:layout_width="match_parent"
@@ -186,19 +469,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <FrameLayout
+                    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
-                        android:background="@drawable/grad_pink">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/imagem_do_servico"
-                            android:textColor="@color/white"
-                            android:textSize="18sp"
-                            android:alpha="0.8"/>
-                    </FrameLayout>
+                        android:src="@drawable/corteescova"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -224,15 +500,26 @@
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivProviderLogo1"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/logobelaforma"
+                            android:scaleType="centerCrop"
+                            app:shapeAppearanceOverlay="@style/CircleImage"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvServiceName1" />
                         <TextView
                             android:id="@+id/tvServiceProvider1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Salão Bela Forma"
                             android:textColor="@color/text_gray"
-                            android:layout_marginTop="4dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvServiceName1" />
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="@id/ivProviderLogo1"
+                            app:layout_constraintStart_toEndOf="@id/ivProviderLogo1"
+                            app:layout_constraintTop_toTopOf="@id/ivProviderLogo1" />
                         <View
                             android:id="@+id/divider1"
                             android:layout_width="match_parent"
@@ -307,7 +594,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Service 2: Manutenção de Notebook -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardService2"
                 android:layout_width="match_parent"
@@ -320,19 +606,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <FrameLayout
+                    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
-                        android:background="@drawable/grad_blue">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/imagem_do_servico"
-                            android:textColor="@color/white"
-                            android:textSize="18sp"
-                            android:alpha="0.8"/>
-                    </FrameLayout>
+                        android:src="@drawable/manutencaonotebook"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -358,15 +637,26 @@
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivProviderLogo2"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/logotechfix"
+                            android:scaleType="centerCrop"
+                            app:shapeAppearanceOverlay="@style/CircleImage"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvServiceName2" />
                         <TextView
                             android:id="@+id/tvServiceProvider2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="TechFix Consertos"
                             android:textColor="@color/text_gray"
-                            android:layout_marginTop="4dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvServiceName2" />
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="@id/ivProviderLogo2"
+                            app:layout_constraintStart_toEndOf="@id/ivProviderLogo2"
+                            app:layout_constraintTop_toTopOf="@id/ivProviderLogo2" />
                         <View
                             android:id="@+id/divider2"
                             android:layout_width="match_parent"
@@ -441,7 +731,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Service 3: Pizza Grande -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardService3"
                 android:layout_width="match_parent"
@@ -454,19 +743,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <FrameLayout
+                    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
-                        android:background="@drawable/grad_red">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/imagem_do_servico"
-                            android:textColor="@color/white"
-                            android:textSize="18sp"
-                            android:alpha="0.8"/>
-                    </FrameLayout>
+                        android:src="@drawable/pizzagrande"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -492,15 +774,26 @@
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivProviderLogo3"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/logopizzarianapolitana"
+                            android:scaleType="centerCrop"
+                            app:shapeAppearanceOverlay="@style/CircleImage"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvServiceName3" />
                         <TextView
                             android:id="@+id/tvServiceProvider3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Pizzaria Napolitana"
                             android:textColor="@color/text_gray"
-                            android:layout_marginTop="4dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvServiceName3" />
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="@id/ivProviderLogo3"
+                            app:layout_constraintStart_toEndOf="@id/ivProviderLogo3"
+                            app:layout_constraintTop_toTopOf="@id/ivProviderLogo3" />
                         <View
                             android:id="@+id/divider3"
                             android:layout_width="match_parent"
@@ -575,7 +868,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Service 4: Plano Mensal -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardService4"
                 android:layout_width="match_parent"
@@ -588,19 +880,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <FrameLayout
+                    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
-                        android:background="@drawable/grad_green">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/imagem_do_servico"
-                            android:textColor="@color/white"
-                            android:textSize="18sp"
-                            android:alpha="0.8"/>
-                    </FrameLayout>
+                        android:src="@drawable/planomensal"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -626,15 +911,26 @@
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivProviderLogo4"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/logofitlife"
+                            android:scaleType="centerCrop"
+                            app:shapeAppearanceOverlay="@style/CircleImage"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvServiceName4" />
                         <TextView
                             android:id="@+id/tvServiceProvider4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Academia FitLife"
                             android:textColor="@color/text_gray"
-                            android:layout_marginTop="4dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvServiceName4" />
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="@id/ivProviderLogo4"
+                            app:layout_constraintStart_toEndOf="@id/ivProviderLogo4"
+                            app:layout_constraintTop_toTopOf="@id/ivProviderLogo4" />
                         <View
                             android:id="@+id/divider4"
                             android:layout_width="match_parent"
@@ -709,7 +1005,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Service 5: Revisão Completa -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardService5"
                 android:layout_width="match_parent"
@@ -722,19 +1017,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <FrameLayout
+                    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
-                        android:background="@drawable/grad_gray">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/imagem_do_servico"
-                            android:textColor="@color/white"
-                            android:textSize="18sp"
-                            android:alpha="0.8"/>
-                    </FrameLayout>
+                        android:src="@drawable/revisaocompleta"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -760,15 +1048,26 @@
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivProviderLogo5"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/logoautomecanicasilva"
+                            android:scaleType="centerCrop"
+                            app:shapeAppearanceOverlay="@style/CircleImage"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvServiceName5" />
                         <TextView
                             android:id="@+id/tvServiceProvider5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Auto Mecânica Silva"
                             android:textColor="@color/text_gray"
-                            android:layout_marginTop="4dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvServiceName5" />
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="@id/ivProviderLogo5"
+                            app:layout_constraintStart_toEndOf="@id/ivProviderLogo5"
+                            app:layout_constraintTop_toTopOf="@id/ivProviderLogo5" />
                         <View
                             android:id="@+id/divider5"
                             android:layout_width="match_parent"
@@ -843,7 +1142,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Service 6: Curso de Inglês -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardService6"
                 android:layout_width="match_parent"
@@ -856,19 +1154,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <FrameLayout
+                    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
-                        android:background="@drawable/grad_purple">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/imagem_do_servico"
-                            android:textColor="@color/white"
-                            android:textSize="18sp"
-                            android:alpha="0.8"/>
-                    </FrameLayout>
+                        android:src="@drawable/cursodeingles"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -894,15 +1185,26 @@
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivProviderLogo6"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/logoescoladeidiomasglobal"
+                            android:scaleType="centerCrop"
+                            app:shapeAppearanceOverlay="@style/CircleImage"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvServiceName6" />
                         <TextView
                             android:id="@+id/tvServiceProvider6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Escola de Idiomas Global"
                             android:textColor="@color/text_gray"
-                            android:layout_marginTop="4dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvServiceName6" />
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="@id/ivProviderLogo6"
+                            app:layout_constraintStart_toEndOf="@id/ivProviderLogo6"
+                            app:layout_constraintTop_toTopOf="@id/ivProviderLogo6" />
                         <View
                             android:id="@+id/divider6"
                             android:layout_width="match_parent"
@@ -980,7 +1282,6 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/providerHeader"
         android:layout_width="match_parent"
@@ -59,38 +58,33 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Banner -->
-            <FrameLayout
-                android:id="@+id/providerBanner"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/grad_pink">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Foto do Estabelecimento"
-                    android:textColor="@color/white"
-                    android:alpha="0.8" />
-            </FrameLayout>
-
-            <!-- Details -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
                 android:background="@color/white">
 
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivProviderLogoProfile"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/CircleImage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/logobelaforma" />
+
                 <TextView
                     android:id="@+id/tvProviderName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:text="Salão Bela Forma"
                     android:textColor="@color/verde_petroleo_profundo"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/ivProviderLogoProfile" />
 
                 <TextView
                     android:id="@+id/tvProviderCategory"
@@ -111,7 +105,7 @@
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="@id/ivProviderLogoProfile">
                     <ImageView
                         android:layout_width="14dp"
                         android:layout_height="14dp"
@@ -150,7 +144,8 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/ic_clock"
-                        app:tint="@color/terracota" />
+                        app:tint="@color/terracota"
+                        android:contentDescription="@null" />
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -243,7 +238,6 @@
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Services Section -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -266,7 +260,6 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <!-- Service Item 1 -->
                     <LinearLayout
                         android:id="@+id/itemCatalog1"
                         android:layout_width="match_parent"
@@ -307,7 +300,6 @@
                             android:textSize="16sp" />
                     </LinearLayout>
 
-                    <!-- Service Item 2 -->
                     <LinearLayout
                         android:id="@+id/itemCatalog2"
                         android:layout_width="match_parent"
@@ -348,7 +340,6 @@
                             android:textSize="16sp" />
                     </LinearLayout>
 
-                    <!-- Service Item 3 -->
                     <LinearLayout
                         android:id="@+id/itemCatalog3"
                         android:layout_width="match_parent"
@@ -389,7 +380,6 @@
                             android:textSize="16sp" />
                     </LinearLayout>
 
-                    <!-- Service Item 4 -->
                     <LinearLayout
                         android:id="@+id/itemCatalog4"
                         android:layout_width="match_parent"
@@ -430,7 +420,6 @@
                             android:textSize="16sp" />
                     </LinearLayout>
 
-                    <!-- Service Item 5 -->
                     <LinearLayout
                         android:id="@+id/itemCatalog5"
                         android:layout_width="match_parent"
@@ -473,7 +462,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Reviews Section -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -512,7 +500,6 @@
                             app:layout_constraintTop_toTopOf="parent"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <!-- Review 1 -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -589,7 +576,6 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="16dp" />
 
-                    <!-- Review 2 -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -665,7 +651,6 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="16dp" />
 
-                    <!-- Review 3 -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -747,7 +732,6 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Bottom Buttons -->
     <LinearLayout
         android:id="@+id/bottomButtons"
         android:layout_width="match_parent"
@@ -778,7 +762,7 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:backgroundTint="@color/terracota"
-            android:text="@string/contratar_servico"
+            android:text="@string/finalizar_agendamento"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:cornerRadius="16dp" />

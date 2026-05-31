@@ -102,6 +102,18 @@
         <activity
             android:name=".AddressDetailActivity"
             android:exported="false" />
+        <activity
+            android:name=".PrivacyPolicyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FaqActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ContactSupportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReportProblemActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

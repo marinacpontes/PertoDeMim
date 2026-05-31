@@ -1,39 +1,14 @@
 package com.app.pertodemim.model;
 
 public class CadastroRequest {
-    private String nome;
-    private String email;
-    private String senha;
-    private String tipo;
-    private String telefone;
-    private String cpf_cnpj;
-    private String data_nascimento;
-    private String logradouro;
-    private String cep;
-    private String numero;
-    private String bairro;
-    private String complemento;
-    private String cidade;
-    private String estado;
+    private String nome, email, senha, tipo, telefone, cpf_cnpj, data_nascimento, logradouro, cep, numero, bairro, complemento, cidade, estado;
 
     public CadastroRequest(String nome, String email, String senha, String tipo, String telefone, String cpf_cnpj, String data_nascimento, String logradouro, String cep, String numero, String bairro, String complemento, String cidade, String estado) {
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.tipo = tipo;
-        this.telefone = telefone;
-        this.cpf_cnpj = cpf_cnpj;
-        this.data_nascimento = data_nascimento;
-        this.logradouro = logradouro;
-        this.cep = cep;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.complemento = complemento;
-        this.cidade = cidade;
-        this.estado = estado;
+        this.nome = nome; this.email = email; this.senha = senha; this.tipo = tipo; this.telefone = telefone; this.cpf_cnpj = cpf_cnpj;
+        this.data_nascimento = data_nascimento; this.logradouro = logradouro; this.cep = cep; this.numero = numero; this.bairro = bairro;
+        this.complemento = complemento; this.cidade = cidade; this.estado = estado;
     }
 
-    // Getters e Setters
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
     public String getEmail() { return email; }

@@ -1,13 +1,9 @@
 package com.app.pertodemim.model;
 
 public class PedidoResponse {
-    private int id;
-    private int servico_id;
-    private int cliente_id;
-    private int fornecedor_id;
-    private String status;
+    private int id, servico_id, cliente_id, fornecedor_id;
+    private String status, data_pedido;
     private double valor;
-    private String data_pedido;
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }

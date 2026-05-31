@@ -63,23 +63,35 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/btnFaq"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Perguntas Frequentes (FAQ)"
-                    android:paddingVertical="8dp" />
+                    android:paddingVertical="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground" />
 
                 <TextView
+                    android:id="@+id/btnSupport"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Falar com Suporte"
-                    android:paddingVertical="8dp" />
+                    android:paddingVertical="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground" />
 
                 <TextView
+                    android:id="@+id/btnReportProblem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Relatar um Problema"
-                    android:paddingVertical="8dp" />
+                    android:paddingVertical="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
