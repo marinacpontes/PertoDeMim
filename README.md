@@ -34,7 +34,7 @@ Do outro lado, prestadores têm um espaço próprio para divulgar seus serviços
 | **Mapa interativo** | Visualize prestadores e serviços próximos em tempo real |
 | **Busca avançada** | Filtre por preço, distância, categoria e avaliação |
 | **Chat integrado** | Converse com o prestador antes e durante o serviço |
-| **Pagamento no app** | Pix, cartão de crédito ou débito |
+| **Pagamento no app** | Pix, cartão ou dinheiro |
 | **Avaliações** | Avalie o serviço após a conclusão |
 | **Favoritos** | Salve seus prestadores preferidos |
 
