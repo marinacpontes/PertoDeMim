@@ -46,7 +46,7 @@ Do outro lado, prestadores têm um espaço próprio para divulgar seus serviços
 | **Gestão de serviços** | Cadastre e gerencie os serviços oferecidos |
 | **Gestão de pedidos** | Aceite, recuse ou conclua pedidos de clientes |
 | **Chat com clientes** | Comunicação direta pelo app |
-| 🌟 **Reputação** | Acompanhe avaliações e sua média de nota |
+| **Reputação** | Acompanhe avaliações e sua média de nota |
 
 ---
 
