@@ -68,14 +68,14 @@ Do outro lado, prestadores têm um espaço próprio para divulgar seus serviços
 
 <table align="center">
   <tr>
-    <td align="center"><img src="assets/autenticacao.jpeg" width="200"/><br/><sub>Autenticação</sub></td>
-    <td align="center"><img src="assets/mapa.jpeg" width="200"/><br/><sub>Mapa</sub></td>
-    <td align="center"><img src="assets/vitrine.jpeg" width="200"/><br/><sub>Vitrine</sub></td>
+    <td align="center"><sub>Autenticação</sub><br/><img src="assets/autenticacao.jpeg" width="200"/></td>
+    <td align="center"><sub>Mapa</sub><br/><img src="assets/mapa.jpeg" width="200"/></td>
+    <td align="center"><sub>Vitrine</sub><br/><img src="assets/vitrine.jpeg" width="200"/></td>
   </tr>
   <tr>
-    <td align="center"><img src="assets/perfilfornecedor.jpeg" width="200"/><br/><sub>Perfil do Fornecedor</sub></td>
-    <td align="center"><img src="assets/pagamento.jpeg" width="200"/><br/><sub>Tela de Pagamento</sub></td>
-    <td align="center"><img src="assets/perfilcliente.jpeg" width="200"/><br/><sub>Perfil do Cliente</sub></td>
+    <td align="center"><sub>Perfil do Fornecedor</sub><br/><img src="assets/perfilfornecedor.jpeg" width="200"/></td>
+    <td align="center"><sub>Tela de Pagamento</sub><br/><img src="assets/pagamento.jpeg" width="200"/></td>
+    <td align="center"><sub>Perfil do Cliente</sub><br/><img src="assets/perfilcliente.jpeg" width="200"/></td>
   </tr>
 </table>
 
