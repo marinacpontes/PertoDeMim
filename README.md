@@ -50,16 +50,16 @@ Do outro lado, prestadores têm um espaço próprio para divulgar seus serviços
 
 ---
 
-## 🗂️ Categorias
+## Categorias
 
 <p>
-  <img src="https://img.shields.io/badge/💇 Beleza e Estética-f472b6?style=flat-square"/>
-  <img src="https://img.shields.io/badge/🏥 Saúde-34d399?style=flat-square"/>
-  <img src="https://img.shields.io/badge/🍽️ Alimentação-fb923c?style=flat-square"/>
-  <img src="https://img.shields.io/badge/🔧 Manutenção-60a5fa?style=flat-square"/>
-  <img src="https://img.shields.io/badge/💻 Tecnologia-a78bfa?style=flat-square"/>
-  <img src="https://img.shields.io/badge/📚 Educação-facc15?style=flat-square"/>
-  <img src="https://img.shields.io/badge/✳️ Outros-94a3b8?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Beleza e Estética-f472b6?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Saúde-34d399?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Alimentação-fb923c?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Manutenção-60a5fa?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Tecnologia-a78bfa?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Educação-facc15?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Outros-94a3b8?style=flat-square"/>
 </p>
 
 ---
